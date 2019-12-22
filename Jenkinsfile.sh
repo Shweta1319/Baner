@@ -8,26 +8,30 @@ pipeline {
        maven 'Maven' 
        jdk 'Java'      
     }
-       
-    stage('Build') {
-            steps {
-                sh 'mvn install -DskipTests=true'
+    
+    stages {
+            stage('Build') {
+                    steps {
+                        sh 'mvn install -DskipTests=true'
+                    }
             }
+
+             stage('Test'){
+                    steps{
+                      sh 'mvn test'
+                    }
+             }
+
+             stage('Deploy'){
+                    steps{
+                      sh 'mvn deploy'
+                    }
+             }
+
     }
-        
-     stage('Test'){
-            steps{
-              sh 'mvn test'
-            }
-     }
-     
-     stage('Deploy'){
-            steps{
-              sh 'mvn deploy'
-            }
-     }
-     
 }
+        
+        
             
         
         
